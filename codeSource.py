@@ -1,0 +1,1 @@
+print("Bienvenue dans le calculateur des lois de probabilités")
