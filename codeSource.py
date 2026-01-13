@@ -7,21 +7,25 @@ def geometrique(p, k):
     return (1-p)**(k-1) * p
 
 def poisson(lambdaLettre, k):
-    return (lambdaLettre**k * e**(-k))/math.factorial(k)
-
+    return (lambdaLettre ** k * math.exp(-lambdaLettre)) / math.factorial(k)
+#------------------------
 def estEgal(func, k):
+    return func(k)
+
+def superieurOuEgal(func, k):
+    return 1 - inferieurOuEgal(func, k - 1)
+
+def inferieurOuEgal(func, k):
     resultat = 0
     for i in range(k + 1):
         resultat += func(i)
     return resultat
 
-def superieurOuEgal(func, k): pass
+def superieur(func, k):
+    return 1 - inferieurOuEgal(func, k)
 
-def inferieurOuEgal(func, k): pass
-
-def superieur(func, k): pass
-
-def inferieur(func, k): pass
+def inferieur(func, k):
+    return inferieurOuEgal(func, k - 1)
 
 print("Bienvenue dans le calculateur des lois de probabilités!")
 print("-"*25)
@@ -57,7 +61,19 @@ if choix == "2":
     print("Var[X] = ", variance)
     if signe == "=":
         f = lambda k: binomiale(valeur_n, valeur_p, k)
-        print(f"P[X{signe}{valeur_k}] = ", estEgal(f, valeur_k))
+        print(f"P[X{signe}{valeur_k}] = ", estEgal(f, valeur_k)*100,"%")
+    if signe == "<":
+        f = lambda k: binomiale(valeur_n, valeur_p, k)
+        print(f"P[X{signe}{valeur_k}] = ", inferieur(f, valeur_k))
+    if signe == ">":
+        f = lambda k: binomiale(valeur_n, valeur_p, k)
+        print(f"P[X{signe}{valeur_k}] = ", superieur(f, valeur_k))
+    if signe == "<=":
+        f = lambda k: binomiale(valeur_n, valeur_p, k)
+        print(f"P[X{signe}{valeur_k}] = ", inferieurOuEgal(f, valeur_k))
+    if signe == ">=":
+        f = lambda k: binomiale(valeur_n, valeur_p, k)
+        print(f"P[X{signe}{valeur_k}] = ", superieurOuEgal(f, valeur_k))
 
 #Bloc pour la loi Géométrique
 if choix == "3":
@@ -65,13 +81,45 @@ if choix == "3":
     valeur_k = int(input("Combien d'essai sont nécessaires afin d'obtenir un succès(k)? "))
     signe = input("X (<, >, <=, >=, =) k ? ")
     esperance = 1 / valeur_p
-    variance = (1-p)/p**2
+    variance = (1-valeur_p)/valeur_p**2
     print("-"*25)
     print("E[X] = ", esperance)
     print("Var[X] = ", variance)
     if signe == "=":
         f = lambda k : geometrique(valeur_p, valeur_k)  
         print(f"P[X{signe}{valeur_k}] = ", estEgal(f, valeur_k))
-        
-#Bloc pour la loi de Poisson
+    if signe == "<":
+        f = lambda k: geometrique(valeur_n, valeur_p, k)
+        print(f"P[X{signe}{valeur_k}] = ", inferieur(f, valeur_k))
+    if signe == ">":
+        f = lambda k: geometrique(valeur_n, valeur_p, k)
+        print(f"P[X{signe}{valeur_k}] = ", superieur(f, valeur_k))
+    if signe == "<=":
+        f = lambda k: geometrique(valeur_n, valeur_p, k)
+        print(f"P[X{signe}{valeur_k}] = ", inferieurOuEgal(f, valeur_k))
+    if signe == ">=":
+        f = lambda k: geometrique(valeur_n, valeur_p, k)
+        print(f"P[X{signe}{valeur_k}] = ", superieurOuEgal(f, valeur_k))
 
+#Bloc pour la loi de Poisson
+if choix == "4":
+    valeur_lambda = int(input("Quelle est la moyenne d'observation par heure? "))
+    valeur_k = int(input("Quelle est la valeur observée? "))
+    print("-"*25)
+    print("E[X] = ", valeur_lambda)
+    print("Var[X] = ", valeur_lambda)
+    if signe == "=":
+        f = lambda k : geometrique(valeur_p, valeur_k)  
+        print(f"P[X{signe}{valeur_k}] = ", estEgal(f, valeur_k))
+    if signe == "<":
+        f = lambda k: geometrique(valeur_n, valeur_p, k)
+        print(f"P[X{signe}{valeur_k}] = ", inferieur(f, valeur_k))
+    if signe == ">":
+        f = lambda k: geometrique(valeur_n, valeur_p, k)
+        print(f"P[X{signe}{valeur_k}] = ", superieur(f, valeur_k))
+    if signe == "<=":
+        f = lambda k: geometrique(valeur_n, valeur_p, k)
+        print(f"P[X{signe}{valeur_k}] = ", inferieurOuEgal(f, valeur_k))
+    if signe == ">=":
+        f = lambda k: geometrique(valeur_n, valeur_p, k)
+        print(f"P[X{signe}{valeur_k}] = ", superieurOuEgal(f, valeur_k))
