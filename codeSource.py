@@ -6,6 +6,9 @@ def binomiale(n, p, k):
 def geometrique(p, k):
     return (1-p)**(k-1) * p
 
+def poisson(lambdaLettre, k):
+    return (lambdaLettre**k * e**(-k))/math.factorial(k)
+
 def estEgal(func, k):
     resultat = 0
     for i in range(k + 1):
@@ -26,13 +29,12 @@ print("Loi discrète: ")
 print("1 - Loi Bernoulli")
 print("2 - Loi Binomiale")
 print("3 - Loi Géométrique")
-print("4 - Loi Binomiale négative")
-print("5 - Loi Poisson")
+print("4 - Loi Poisson")
 print("Loi continue: ")
-print("6 - Loi Uniforme")
-print("7 - Loi Exponentielle")
-print("8 - Loi Gamma")
-print("9 - Loi Normale")
+print("5 - Loi Uniforme")
+print("6 - Loi Exponentielle")
+print("7 - Loi Gamma")
+print("8 - Loi Normale")
 print("-"*25)
 choix = input("Entrez le numéro de votre choix: ")
 #Bloc pour la loi Bernoulli
@@ -56,3 +58,20 @@ if choix == "2":
     if signe == "=":
         f = lambda k: binomiale(valeur_n, valeur_p, k)
         print(f"P[X{signe}{valeur_k}] = ", estEgal(f, valeur_k))
+
+#Bloc pour la loi Géométrique
+if choix == "3":
+    valeur_p = float(input("Entrez la probabilité(p): "))
+    valeur_k = int(input("Combien d'essai sont nécessaires afin d'obtenir un succès(k)? "))
+    signe = input("X (<, >, <=, >=, =) k ? ")
+    esperance = 1 / valeur_p
+    variance = (1-p)/p**2
+    print("-"*25)
+    print("E[X] = ", esperance)
+    print("Var[X] = ", variance)
+    if signe == "=":
+        f = lambda k : geometrique(valeur_p, valeur_k)  
+        print(f"P[X{signe}{valeur_k}] = ", estEgal(f, valeur_k))
+        
+#Bloc pour la loi de Poisson
+
