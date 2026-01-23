@@ -23,7 +23,7 @@ def superieurOuEgal(func, k):
     return 1 - inferieurOuEgal(func, k - 1)
 
 def inferieurOuEgal(func, k):
-    resultat = 0
+    resultat = 0.0
     for i in range(k + 1):
         resultat += func(i)
     return resultat
