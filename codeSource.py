@@ -4,20 +4,20 @@ def binomiale(n, p, k):
     return round(math.comb(n, k) * p**k *(1-p)**(n-k), 4)
 
 def geometrique(p, k):
-    return round((1-p)**(k-1) * p, 4)
+    return (1-p)**(k-1) * p
 
 def poisson(lambdaLettre, k):
-    return round((lambdaLettre ** k * math.exp(-lambdaLettre)) / math.factorial(k), 4)
+    return (lambdaLettre ** k * math.exp(-lambdaLettre)) / math.factorial(k)
 
 def exponentielle(lambdaLettre, k):
-    return round(lambdaLettre * math.exp(-lambdaLettre*k), 4)
+    return lambdaLettre * math.exp(-lambdaLettre*k)
 
 def gamma(k, alpha):
-    return round((k**(alpha-1) * math.exp(-k))/math.gamma(alpha), 4)
+    return (alpha**k * k**(k-1) * math.exp(-alpha*k)) / math.gamma(k)
 
 #----------------------------------------------------------------------------#
 def estEgal(func, k):
-    return func(k)
+    return round(func(k), 4)
 
 def superieurOuEgal(func, k):
     return 1 - inferieurOuEgal(func, k - 1)
@@ -26,7 +26,7 @@ def inferieurOuEgal(func, k):
     resultat = 0.0
     for i in range(k + 1):
         resultat += func(i)
-    return resultat
+    return round(resultat, 4)
 
 def superieur(func, k):
     return 1 - inferieurOuEgal(func, k)
@@ -67,20 +67,16 @@ if choix == "2":
     print("-"*25)
     print("E[X] = ", esperance)
     print("Var[X] = ", variance)
+    f = lambda k: binomiale(valeur_n, valeur_p, k)
     if signe == "=":
-        f = lambda k: binomiale(valeur_n, valeur_p, k)
         print(f"P[X{signe}{valeur_k}] = ", estEgal(f, valeur_k))
     if signe == "<":
-        f = lambda k: binomiale(valeur_n, valeur_p, k)
         print(f"P[X{signe}{valeur_k}] < ", inferieur(f, valeur_k))
     if signe == ">":
-        f = lambda k: binomiale(valeur_n, valeur_p, k)
         print(f"P[X{signe}{valeur_k}] > ", superieur(f, valeur_k))
     if signe == "<=":
-        f = lambda k: binomiale(valeur_n, valeur_p, k)
         print(f"P[X{signe}{valeur_k}] <= ", inferieurOuEgal(f, valeur_k))
     if signe == ">=":
-        f = lambda k: binomiale(valeur_n, valeur_p, k)
         print(f"P[X{signe}{valeur_k}] >= ", superieurOuEgal(f, valeur_k))
 
 #Bloc pour la loi Géométrique
@@ -93,20 +89,16 @@ if choix == "3":
     print("-"*25)
     print("E[X] = ", esperance)
     print("Var[X] = ", variance)
+    f = lambda k: geometrique(valeur_p, k)
     if signe == "=":
-        f = lambda k : geometrique(valeur_p, k)  
         print(f"P[X{signe}{valeur_k}] = ", estEgal(f, valeur_k))
     if signe == "<":
-        f = lambda k: geometrique(valeur_n, valeur_p, k)
         print(f"P[X{signe}{valeur_k}] < ", inferieur(f, valeur_k))
     if signe == ">":
-        f = lambda k: geometrique(valeur_n, valeur_p, k)
         print(f"P[X{signe}{valeur_k}] > ", superieur(f, valeur_k))
     if signe == "<=":
-        f = lambda k: geometrique(valeur_n, valeur_p, k)
         print(f"P[X{signe}{valeur_k}] <= ", inferieurOuEgal(f, valeur_k))
     if signe == ">=":
-        f = lambda k: geometrique(valeur_n, valeur_p, k)
         print(f"P[X{signe}{valeur_k}] >= ", superieurOuEgal(f, valeur_k))
 
 #Bloc pour la loi de Poisson
@@ -117,61 +109,51 @@ if choix == "4":
     print("-"*25)
     print("E[X] = ", valeur_lambda)
     print("Var[X] = ", valeur_lambda)
+    f = lambda k: poisson(valeur_lambda, k)
     if signe == "=":
-        f = lambda k : poisson(valeur_lambda, k)  
         print(f"P[X{signe}{valeur_k}] = ", estEgal(f, valeur_k))
     if signe == "<":
-        f = lambda k: poisson(valeur_lambda, k)
         print(f"P[X{signe}{valeur_k}] < ", inferieur(f, valeur_k))
     if signe == ">":
-        f = lambda k: poisson(valeur_lambda, k)
         print(f"P[X{signe}{valeur_k}] > ", superieur(f, valeur_k))
     if signe == "<=":
-        f = lambda k: poisson(valeur_lambda, k)
         print(f"P[X{signe}{valeur_k}] <= ", inferieurOuEgal(f, valeur_k))
     if signe == ">=":
-        f = lambda k: poisson(valeur_lambda, k)
         print(f"P[X{signe}{valeur_k}] >= ", superieurOuEgal(f, valeur_k))
 
-#Bloc pour la loi exponentielle
+#Bloc pour la loi exponentielle (continue)
 if choix == "5":
     valeur_lambda = int(input("Quelle est le taux d'occurence par heure(lambda)? "))
-    valeur_k = int(input("Quelle est le temps d'attente avant le prochain évènement? "))
+    valeur_k = float(input("Quelle est le temps d'attente avant le prochain évènement? "))
     signe = input("X (<, >, <=, >=) k ? ")
     print("-"*25)
     print("E[X] = ", 1 / valeur_lambda)
     print("Var[X] = ", 1 / (valeur_lambda)**2)
+    # On ne touche pas à f ici pour éviter l'erreur float callable
     if signe == "<":
-        f = lambda k: exponentielle(valeur_lambda, k)
-        print(f"P[X{signe}{valeur_k}] < ", inferieur(f, valeur_k))
+        print(f"P[X{signe}{valeur_k}] < ", round(1 - math.exp(-valeur_lambda*valeur_k), 4))
     if signe == ">":
-        f = lambda k: exponentielle(valeur_lambda, k)
-        print(f"P[X{signe}{valeur_k}] > ", superieur(f, valeur_k))
+        print(f"P[X{signe}{valeur_k}] > ", round(math.exp(-valeur_lambda*valeur_k), 4))
     if signe == "<=":
-        f = lambda k: exponentielle(valeur_lambda, k)
-        print(f"P[X{signe}{valeur_k}] <= ", inferieurOuEgal(f, valeur_k))
+        print(f"P[X{signe}{valeur_k}] <= ", round(1 - math.exp(-valeur_lambda*valeur_k), 4))
     if signe == ">=":
-        f = lambda k: exponentielle(valeur_lambda, k)
-        print(f"P[X{signe}{valeur_k}] >= ", superieurOuEgal(f, valeur_k))
+        print(f"P[X{signe}{valeur_k}] >= ", round(math.exp(-valeur_lambda*valeur_k), 4))
 
-#Bloc pour la loi Gamma
+#Bloc pour la loi Gamma (continue)
 if choix == "6":
-    valeur_alpha = int(input("Quel est le taux d'occurrence  par heure(lambda) ? "))
-    valeur_k = int(input("Quel est le paramètre de forme (k) ? "))
+    valeur_alpha = float(input("Quel est le taux d'occurrence par heure(lambda) ? "))
+    valeur_k = float(input("Quel est le paramètre de forme (k) ? "))
     signe = input("X (<, >, <=, >=) k ? ")
     print("-" * 25)
     print("E[X] =", valeur_k / valeur_alpha)
     print("Var[X] =", valeur_k / (valeur_alpha ** 2))
+    # Pour rester compatible avec ton code, on laisse f
+    f = lambda x: gamma(x, valeur_alpha)
     if signe == "<":
-        f = lambda k: gamma(valeur_k, valeur_alpha)
-        print(f"P[X{signe}{valeur_k}] < ", inferieur(f, valeur_k))
+        print(f"P[X{signe}{valeur_k}] < ", "Calcul approximatif non implémenté pour continue")
     if signe == ">":
-        f = lambda k: gamma(valeur_k, valeur_alpha)
-        print(f"P[X{signe}{valeur_k}] > ", superieur(f, valeur_k))
+        print(f"P[X{signe}{valeur_k}] > ", "Calcul approximatif non implémenté pour continue")
     if signe == "<=":
-        f = lambda k: gamma(valeur_k, valeur_alpha)
-        print(f"P[X{signe}{valeur_k}] <= ", inferieurOuEgal(f, valeur_k))
+        print(f"P[X{signe}{valeur_k}] <= ", "Calcul approximatif non implémenté pour continue")
     if signe == ">=":
-        f = lambda k: gamma(valeur_k, valeur_alpha)
-        print(f"P[X{signe}{valeur_k}] >= ", superieurOuEgal(f, valeur_k))
-
+        print(f"P[X{signe}{valeur_k}] >= ", "Calcul approximatif non implémenté pour continue")
