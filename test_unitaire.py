@@ -18,8 +18,8 @@ assert codeSource.superieurOuEgal(codeSource.geometrique(0.2, 3), 3) == 0.64, "T
 assert codeSource.poisson(2, 2) == 0.2707, "Test unitaire égalité/poisson échoué"
 assert codeSource.inferieur(codeSource.poisson(2, 2), 2) == 0.4060, "Test unitaire '<' échoué(géométrique)"
 assert codeSource.inferieurOuEgal(codeSource.poisson(2, 2), 2) == 0.6767, "Test unitaire '<=' échoué(géométrique)"
-assert codeSource.superieur(codeSource.poisson(2, 2), 2) == 0.5940, "Test unitaire '>' échoué(géométrique)"
-assert codeSource.superieurOuEgal(codeSource.poisson(2, 2), 2) == 0.3233, "Test unitaire '>=' échoué(géométrique)"
+assert codeSource.superieur(codeSource.poisson(2, 2), 2) == 0.3233, "Test unitaire '>' échoué(géométrique)"
+assert codeSource.superieurOuEgal(codeSource.poisson(2, 2), 2) == 0.5940, "Test unitaire '>=' échoué(géométrique)"
 
 #Test unitaire pour la loi exponentielle
 assert codeSource.inferieur(codeSource.exponentielle(0.5, 4), 4) == 0.865, "Test unitaire '<' échoué(exponentielle)"
