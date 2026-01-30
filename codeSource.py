@@ -135,7 +135,7 @@ if choix == "4":
 
 #Bloc pour la loi exponentielle
 if choix == "5":
-    valeur_lambda = int(input("Quelle est le taux d'occurence(lambda)? "))
+    valeur_lambda = int(input("Quelle est le taux d'occurence par heure(lambda)? "))
     valeur_k = int(input("Quelle est le temps d'attente avant le prochain évènement? "))
     signe = input("X (<, >, <=, >=) k ? ")
     print("-"*25)
@@ -156,12 +156,12 @@ if choix == "5":
 
 #Bloc pour la loi Gamma
 if choix == "6":
-    valeur_alpha = float(input("Quel est le taux d'occurrence (lambda) ? "))
-    valeur_k = float(input("Quel est le paramètre de forme (k) ? "))
+    valeur_alpha = int(input("Quel est le taux d'occurrence  par heure(lambda) ? "))
+    valeur_k = int(input("Quel est le paramètre de forme (k) ? "))
     signe = input("X (<, >, <=, >=) k ? ")
     print("-" * 25)
-    print("E[X] =", valeur_k / valeur_lambda)
-    print("Var[X] =", valeur_k / (valeur_lambda ** 2))
+    print("E[X] =", valeur_k / valeur_alpha)
+    print("Var[X] =", valeur_k / (valeur_alpha ** 2))
     if signe == "<":
         f = lambda k: gamma(valeur_k, valeur_alpha)
         print(f"P[X{signe}{valeur_k}] < ", inferieur(f, valeur_k))

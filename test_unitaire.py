@@ -22,17 +22,17 @@ assert codeSource.superieur(codeSource.poisson(2, 2), 2) == 0.5940, "Test unitai
 assert codeSource.superieurOuEgal(codeSource.poisson(2, 2), 2) == 0.3233, "Test unitaire '>=' échoué(géométrique)"
 
 #Test unitaire pour la loi exponentielle
-assert codeSource.inferieur(codeSource.exponentielle(), ) == , "Test unitaire '<' échoué(exponentielle)"
-assert codeSource.inferieurOuEgal(codeSource.exponentielle(), ) == , "Test unitaire '<=' échoué(exponentielle)"
-assert codeSource.superieur(codeSource.exponentielle(), ) == , "Test unitaire '>' échoué(exponentielle)"
-assert codeSource.superieurOuEgal(codeSource.exponentielle(), ) == , "Test unitaire '>=' échoué(exponentielle)"
+assert codeSource.inferieur(codeSource.exponentielle(0.5, 4), 4) == 0.865, "Test unitaire '<' échoué(exponentielle)"
+assert codeSource.inferieurOuEgal(codeSource.exponentielle(0.5), 4) == 0.865, "Test unitaire '<=' échoué(exponentielle)"
+assert codeSource.superieur(codeSource.exponentielle(0.5), 4) == 0.135, "Test unitaire '>' échoué(exponentielle)"
+assert codeSource.superieurOuEgal(codeSource.exponentielle(0.5, 4), 4) == 0.135, "Test unitaire '>=' échoué(exponentielle)"
 
 
 #Test unitaire pour la loi gamma
-assert codeSource.inferieur(codeSource.gamma(), ) == , "Test unitaire '<' échoué(gamma)"
-assert codeSource.inferieurOuEgal(codeSource.gamma(), ) == , "Test unitaire '<=' échoué(gamma)"
-assert codeSource.superieur(codeSource.gamma(), ) == , "Test unitaire '>' échoué(gamma)"
-assert codeSource.superieurOuEgal(codeSource.gamma(), ) == , "Test unitaire '>=' échoué(gamma)"
+assert codeSource.inferieur(codeSource.gamma(3, 2), 3) == 0.801, "Test unitaire '<' échoué(gamma)"
+assert codeSource.inferieurOuEgal(codeSource.gamma(3, 2), 3) == 0.801, "Test unitaire '<=' échoué(gamma)"
+assert codeSource.superieur(codeSource.gamma(3, 2), 3) == 0.199, "Test unitaire '>' échoué(gamma)"
+assert codeSource.superieurOuEgal(codeSource.gamma(3, 2), 3) == 0.199, "Test unitaire '>=' échoué(gamma)"
 
 
 
