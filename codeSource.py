@@ -12,8 +12,7 @@ def poisson(lambdaLettre, k):
 def exponentielle(lambdaLettre, k):
     return lambdaLettre * math.exp(-lambdaLettre*k)
 
-def gamma(k, alpha):
-    return (alpha**k * k**(k-1) * math.exp(-alpha*k)) / math.gamma(k)
+
 
 #----------------------------------------------------------------------------#
 def estEgal(func, k):
@@ -43,7 +42,6 @@ print("3 - Loi Géométrique")
 print("4 - Loi Poisson")
 print("Loi continue: ")
 print("5 - Loi Exponentielle")
-print("6 - Loi Gamma")
 print("-"*25)
 
 choix = input("Entrez le numéro de votre choix: ")
@@ -121,7 +119,7 @@ if choix == "4":
     if signe == ">=":
         print(f"P[X{signe}{valeur_k}] >= ", superieurOuEgal(f, valeur_k))
 
-#Bloc pour la loi exponentielle (continue)
+#Bloc pour la loi exponentielle
 if choix == "5":
     valeur_lambda = int(input("Quelle est le taux d'occurence par heure(lambda)? "))
     valeur_k = float(input("Quelle est le temps d'attente avant le prochain évènement? "))
@@ -129,7 +127,6 @@ if choix == "5":
     print("-"*25)
     print("E[X] = ", 1 / valeur_lambda)
     print("Var[X] = ", 1 / (valeur_lambda)**2)
-    # On ne touche pas à f ici pour éviter l'erreur float callable
     if signe == "<":
         print(f"P[X{signe}{valeur_k}] < ", round(1 - math.exp(-valeur_lambda*valeur_k), 4))
     if signe == ">":
@@ -138,22 +135,3 @@ if choix == "5":
         print(f"P[X{signe}{valeur_k}] <= ", round(1 - math.exp(-valeur_lambda*valeur_k), 4))
     if signe == ">=":
         print(f"P[X{signe}{valeur_k}] >= ", round(math.exp(-valeur_lambda*valeur_k), 4))
-
-#Bloc pour la loi Gamma (continue)
-if choix == "6":
-    valeur_alpha = float(input("Quel est le taux d'occurrence par heure(lambda) ? "))
-    valeur_k = float(input("Quel est le paramètre de forme (k) ? "))
-    signe = input("X (<, >, <=, >=) k ? ")
-    print("-" * 25)
-    print("E[X] =", valeur_k / valeur_alpha)
-    print("Var[X] =", valeur_k / (valeur_alpha ** 2))
-    # Pour rester compatible avec ton code, on laisse f
-    f = lambda x: gamma(x, valeur_alpha)
-    if signe == "<":
-        print(f"P[X{signe}{valeur_k}] < ", "Calcul approximatif non implémenté pour continue")
-    if signe == ">":
-        print(f"P[X{signe}{valeur_k}] > ", "Calcul approximatif non implémenté pour continue")
-    if signe == "<=":
-        print(f"P[X{signe}{valeur_k}] <= ", "Calcul approximatif non implémenté pour continue")
-    if signe == ">=":
-        print(f"P[X{signe}{valeur_k}] >= ", "Calcul approximatif non implémenté pour continue")

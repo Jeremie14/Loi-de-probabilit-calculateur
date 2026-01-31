@@ -28,12 +28,6 @@ assert codeSource.superieur(codeSource.exponentielle(0.5), 4) == 0.135, "Test un
 assert codeSource.superieurOuEgal(codeSource.exponentielle(0.5, 4), 4) == 0.135, "Test unitaire '>=' échoué(exponentielle)"
 
 
-#Test unitaire pour la loi gamma
-assert codeSource.inferieur(codeSource.gamma(3, 2), 3) == 0.801, "Test unitaire '<' échoué(gamma)"
-assert codeSource.inferieurOuEgal(codeSource.gamma(3, 2), 3) == 0.801, "Test unitaire '<=' échoué(gamma)"
-assert codeSource.superieur(codeSource.gamma(3, 2), 3) == 0.199, "Test unitaire '>' échoué(gamma)"
-assert codeSource.superieurOuEgal(codeSource.gamma(3, 2), 3) == 0.199, "Test unitaire '>=' échoué(gamma)"
-
 
 
 
